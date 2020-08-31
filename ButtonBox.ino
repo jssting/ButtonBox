@@ -51,11 +51,11 @@ void loop() {
   if (digitalRead(button2) == 0)  Joystick.pressButton(1);  else Joystick.releaseButton(1);
   if (digitalRead(button3) == 0)  Joystick.pressButton(2);  else Joystick.releaseButton(2);
   if (digitalRead(button4) == 0)  Joystick.pressButton(3);  else Joystick.releaseButton(3);
-  if (digitalRead(button5) != 0)  Joystick.pressButton(4);  else Joystick.releaseButton(4);
+  if (digitalRead(button5) != 0)  Joystick.pressButton(4);  else Joystick.releaseButton(4); //suspect that I got a push to open button here
   if (digitalRead(button6) == 0)  Joystick.pressButton(5);  else Joystick.releaseButton(5);
   if (digitalRead(button7) == 0)  Joystick.pressButton(6);  else Joystick.releaseButton(6);
   if (digitalRead(button8) == 0)  Joystick.pressButton(7);  else Joystick.releaseButton(7);
-  if (digitalRead(button9) != 0)  Joystick.pressButton(8);  else Joystick.releaseButton(8);
+  if (digitalRead(button9) != 0)  Joystick.pressButton(8);  else Joystick.releaseButton(8); //suspect that I got a push to open button here
   if (digitalRead(button10) == 0) Joystick.pressButton(9);  else Joystick.releaseButton(9);
   if (digitalRead(button11) == 0) Joystick.pressButton(10); else Joystick.releaseButton(10);
   if (digitalRead(button12) == 0) Joystick.pressButton(11); else Joystick.releaseButton(11);
