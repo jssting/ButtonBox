@@ -1,5 +1,5 @@
 # ButtonBox
-A button box with 10 Buttons and two push button rotary encoders as buttons 11-16 using an Arduino Leonardo or Pro Micro to host a controller for the button box. You will also need to add the Joystick library from Matthew Heironimus (https://github.com/MHeironimus/ArduinoJoystickLibrary) to compile and write it to the ProMicro or Leonardo board.
+A button box with 10 Buttons and two push button rotary encoders as buttons 11-16 using an Arduino Leonardo or Pro Micro to host a controller for the button box. You will also need to add the Joystick library from Matthew Heironimus (https://github.com/MHeironimus/ArduinoJoystickLibrary) as well as the "RotaryEncoder" library by Matthias Hertel to compile and write it to the ProMicro or Leonardo board.
 
 In addition to this you would need:
 	Arduino Leonardo or Pro Micro 5v 16mhz
