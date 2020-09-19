@@ -1,6 +1,7 @@
 #include <RotaryEncoder.h>
 #include <Joystick.h>
 
+//Buttons
 #define button1 18
 #define button2 19
 #define button3 20
@@ -11,11 +12,17 @@
 #define button8 16
 #define button9 8
 #define button10 9
-#define button11 7
-#define button12 6
+#define button11 6
+#define button12 7
+//Rotary Encoders
+#define rotIntPin0 0
+#define rotIntPin1 1
+#define rotIntPin2 2
+#define rotIntPin3 3
 
-RotaryEncoder encoder(3,2);
-RotaryEncoder encoder2(5,4);
+//Define Encoders
+RotaryEncoder encoder(rotIntPin0,rotIntPin1);
+RotaryEncoder encoder2(rotIntPin3,rotIntPin2);
 
 Joystick_ Joystick(JOYSTICK_DEFAULT_REPORT_ID,JOYSTICK_TYPE_GAMEPAD,
   16, 0,                  // Button Count, Hat Switch Count
@@ -43,41 +50,74 @@ void setup() {
   digitalWrite(button9, HIGH);
   digitalWrite(button5, HIGH);
 
-  Joystick.begin(true);
+  Joystick.begin(false);
+  attachInterrupt(digitalPinToInterrupt(rotIntPin0), getTick1, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(rotIntPin1), getTick1, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(rotIntPin2), getTick2, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(rotIntPin3), getTick2, CHANGE); 
+}
+
+void getTick1(){
+  encoder.tick();    
+}
+void getTick2(){
+  encoder2.tick();
 }
 
 void loop() {
-  if (digitalRead(button1) == 0)  Joystick.pressButton(0);  else Joystick.releaseButton(0);
-  if (digitalRead(button2) == 0)  Joystick.pressButton(1);  else Joystick.releaseButton(1);
-  if (digitalRead(button3) == 0)  Joystick.pressButton(2);  else Joystick.releaseButton(2);
-  if (digitalRead(button4) == 0)  Joystick.pressButton(3);  else Joystick.releaseButton(3);
-  if (digitalRead(button5) != 0)  Joystick.pressButton(4);  else Joystick.releaseButton(4); //suspect that I got a push to open button here
-  if (digitalRead(button6) == 0)  Joystick.pressButton(5);  else Joystick.releaseButton(5);
-  if (digitalRead(button7) == 0)  Joystick.pressButton(6);  else Joystick.releaseButton(6);
-  if (digitalRead(button8) == 0)  Joystick.pressButton(7);  else Joystick.releaseButton(7);
-  if (digitalRead(button9) != 0)  Joystick.pressButton(8);  else Joystick.releaseButton(8); //suspect that I got a push to open button here
-  if (digitalRead(button10) == 0) Joystick.pressButton(9);  else Joystick.releaseButton(9);
-  if (digitalRead(button11) == 0) Joystick.pressButton(10); else Joystick.releaseButton(10);
-  if (digitalRead(button12) == 0) Joystick.pressButton(11); else Joystick.releaseButton(11);
-
-   static int pos = 0;    
-   encoder.tick();
   
+  if (digitalRead(button1) == 0)  Joystick.pressButton(0); 
+  if (digitalRead(button2) == 0)  Joystick.pressButton(1); 
+  if (digitalRead(button3) == 0)  Joystick.pressButton(2);  
+  if (digitalRead(button4) == 0)  Joystick.pressButton(3); 
+  if (digitalRead(button5) != 0)  Joystick.pressButton(4); //suspect that I got a push to open button here
+  if (digitalRead(button6) == 0)  Joystick.pressButton(5); 
+  if (digitalRead(button7) == 0)  Joystick.pressButton(6); 
+  if (digitalRead(button8) == 0)  Joystick.pressButton(7); 
+  if (digitalRead(button9) != 0)  Joystick.pressButton(8); //suspect that I got a push to open button here
+  if (digitalRead(button10) == 0) Joystick.pressButton(9); 
+  if (digitalRead(button11) == 0) Joystick.pressButton(10);
+  if (digitalRead(button12) == 0) Joystick.pressButton(13);
+  
+   static int pos = 0;  
+   static int pos2 = 0;  
+    
    int newPos = encoder.getPosition();
-   if (pos != newPos) {
-    if (newPos < pos) {Joystick.setButton(12,HIGH);delay(80);}
-    else if (newPos > pos) {Joystick.setButton(13,HIGH);delay(80);}
-    pos = newPos;
-  } 
-  else {Joystick.releaseButton(12);Joystick.releaseButton(13);}
-  
-   static int pos2 = 0;
-   encoder2.tick();  
    int newPos2 = encoder2.getPosition();
+   
+   if (pos != newPos) {
+    if (newPos < pos) Joystick.pressButton(11);//;delay(80);}
+    else if (newPos > pos) Joystick.pressButton(12);//delay(80);}
+    pos = newPos;
+   }   
+   
    if (pos2 != newPos2) {
-    if (newPos2 < pos2) {Joystick.setButton(14,HIGH);delay(80);}
-    else if (newPos2 > pos2) {Joystick.setButton(15,HIGH);delay(80);}
+    if (newPos2 < pos2) Joystick.pressButton(14);//delay(80);}
+    else if (newPos2 > pos2) Joystick.pressButton(15);//delay(80);}
     pos2 = newPos2;    
-  } 
-  else {Joystick.releaseButton(14);Joystick.releaseButton(15);}
+   } 
+  
+  Joystick.sendState();//send state 1st before we clear the button states
+  ClearButtons();
+}
+
+void ClearButtons()
+{
+  Joystick.releaseButton(0);
+  Joystick.releaseButton(1);
+  Joystick.releaseButton(2);
+  Joystick.releaseButton(3);
+  Joystick.releaseButton(4);
+  Joystick.releaseButton(5);
+  Joystick.releaseButton(6);
+  Joystick.releaseButton(7);
+  Joystick.releaseButton(8);
+  Joystick.releaseButton(9);
+  Joystick.releaseButton(10);
+  Joystick.releaseButton(13);
+  delay(150);// adding the delay to keep the rotary button lit just a bit longer
+  Joystick.releaseButton(12);
+  Joystick.releaseButton(11);
+  Joystick.releaseButton(14);
+  Joystick.releaseButton(15);   
 }
