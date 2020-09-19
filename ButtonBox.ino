@@ -2,14 +2,14 @@
 #include <Joystick.h>
 
 //Buttons
-#define button1 18
-#define button2 19
-#define button3 20
-#define button4 21
-#define button5 10
+#define button1 21
+#define button2 18
+#define button3 19
+#define button4 20
+#define button5 15
 #define button6 14
-#define button7 15
-#define button8 16
+#define button7 16
+#define button8 10
 #define button9 8
 #define button10 9
 #define button11 6
@@ -70,10 +70,10 @@ void loop() {
   if (digitalRead(button2) == 0)  Joystick.pressButton(1); 
   if (digitalRead(button3) == 0)  Joystick.pressButton(2);  
   if (digitalRead(button4) == 0)  Joystick.pressButton(3); 
-  if (digitalRead(button5) != 0)  Joystick.pressButton(4); //suspect that I got a push to open button here
+  if (digitalRead(button5) == 0)  Joystick.pressButton(4); 
   if (digitalRead(button6) == 0)  Joystick.pressButton(5); 
   if (digitalRead(button7) == 0)  Joystick.pressButton(6); 
-  if (digitalRead(button8) == 0)  Joystick.pressButton(7); 
+  if (digitalRead(button8) != 0)  Joystick.pressButton(7); //suspect that I got a push to open button here
   if (digitalRead(button9) != 0)  Joystick.pressButton(8); //suspect that I got a push to open button here
   if (digitalRead(button10) == 0) Joystick.pressButton(9); 
   if (digitalRead(button11) == 0) Joystick.pressButton(10);
