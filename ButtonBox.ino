@@ -86,14 +86,14 @@ void loop() {
    int newPos2 = encoder2.getPosition();
    
    if (pos != newPos) {
-    if (newPos < pos) Joystick.pressButton(11);//;delay(80);}
-    else if (newPos > pos) Joystick.pressButton(12);//delay(80);}
+    if (newPos < pos) Joystick.pressButton(11);
+    else if (newPos > pos) Joystick.pressButton(12);
     pos = newPos;
    }   
    
    if (pos2 != newPos2) {
-    if (newPos2 < pos2) Joystick.pressButton(14);//delay(80);}
-    else if (newPos2 > pos2) Joystick.pressButton(15);//delay(80);}
+    if (newPos2 < pos2) Joystick.pressButton(14);
+    else if (newPos2 > pos2) Joystick.pressButton(15);
     pos2 = newPos2;    
    } 
   
